@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>QueryApp</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+    <style>
+        body {
+            background-color: #D85604;
+            color: black;
+        }
+
+        input[type=checkbox]:checked {
+            background-color: #E88D14;
+        }
+
+        #submit {
+            background-color: #E88D14;
+        }
+
+        #clear {
+            background-color: #AD1B02;
+            color: white;
+        }
+
+        #spinner {
+            display: flex;
+            background: black;
+            height: 100vh;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            z-index: 10;
+            justify-content: center;
+        }
+
+        .loader {
+            background-color: black;
+            width: 5em;
+            height: 5em;
+            margin-top: 5em;
+        }
+
+        .label {
+            color: black;
+        }
+
+        .title {
+            color: black;
+        }
+    </style>
+
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+
+            <h1 class="title">
+                Nyckelvärden
+            </h1>
+            <p class="subtitle">
+                Välj kategori. Sedan underkategori samt kommun. Väljer du inte år specifikt får du tillbaka alla värden
+                i underkategorin.
+            </p>
+
+            <div id="app" class="container">
+
+                <div class="field">
+                    <label class="label">KPI-Kategorier</label>
+                    <div class="select is-fullwidth">
+                        <select id="kpi-categories">
+
+                            <!-- javascript kommer fylla på.. -->
+                            <option>Välj Kategori</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">KPIer</label>
+                    <div class="select is-fullwidth">
+                        <select id="kpis">
+
+                            <!-- javascript kommer fylla på.. -->
+                            <option>Välj KPI</option>
+
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Kommuner</label>
+                    <div class="select is-fullwidth">
+                        <select id="municipality">
+
+                            <!-- javascript kommer fylla på.. -->
+                            <option>Välj Kommun</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div id="years" class="my-3">
+                    <label class="label">Välj år att inkludera</label>
+
+                    <div class="field is-grouped is-justify-content-space-between">
+                        <label class="checkbox"><span>1990</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>1991</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>1992</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>1993</span> <input type="checkbox"></label>
+                    </div>
+                    <div class="field is-grouped is-justify-content-space-between">
+                        <label class="checkbox"><span>1994</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>1995</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>1996</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>1997</span> <input type="checkbox"></label>
+                    </div>
+                    <div class="field is-grouped is-justify-content-space-between">
+                        <label class="checkbox"><span>1998</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>1999</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2000</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2001</span> <input type="checkbox"></label>
+                    </div>
+                    <div class="field is-grouped is-justify-content-space-between">
+                        <label class="checkbox"><span>2002</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2003</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2004</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2005</span> <input type="checkbox"></label>
+                    </div>
+                    <div class="field is-grouped is-justify-content-space-between">
+                        <label class="checkbox"><span>2006</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2007</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2008</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2009</span> <input type="checkbox"></label>
+                    </div>
+                    <div class="field is-grouped is-justify-content-space-between">
+                        <label class="checkbox"><span>2010</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2011</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2012</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2013</span> <input type="checkbox"></label>
+                    </div>
+                    <div class="field is-grouped is-justify-content-space-between">
+                        <label class="checkbox"><span>2014</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2015</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2016</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2017</span> <input type="checkbox"></label>
+                    </div>
+                    <div class="field is-grouped is-justify-content-space-between">
+                        <label class="checkbox"><span>2018</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2019</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2020</span> <input type="checkbox"></label>
+                        <label class="checkbox"><span>2021</span> <input type="checkbox"></label>
+                    </div>
+                </div>
+
+                <div class="control my-3">
+                    <div>Behåll år efter sökning</div>
+                    <label class="radio"><input type="radio" name="answer"> Ja</label>
+                    <label class="radio"><input type="radio" name="answer" checked> Nej</label>
+                </div>
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link" id="submit">Sök!</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-link is-light" id="clear">Rensa</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <div id="spinner">
+        <div class="loader"></div>
+    </div>
+
+
+    <script>
+        let kpiArray;
+        let munArray;
+
+        function loadData() {
+            google.script.run.withSuccessHandler(afterDropDownArrayReturned).getObjectWithArrays()
+        }
+
+        function afterDropDownArrayReturned(objectOfArrays) {
+            kpiArray = objectOfArrays.kpi;
+            munArray = objectOfArrays.mun;
+
+            let select_kpi_categories = document.querySelector("#kpi-categories")
+            let select_municipalities = document.querySelector("#municipality")
+            addUniqueOptionsToDropdownList(select_kpi_categories, kpiArray, 0)
+            addUniqueOptionsToDropdownList(select_municipalities, munArray, 1, 2)
+            afterChangedCategory()
+        }
+
+        function afterChangedCategory() {
+            let select_kpi_categories = document.querySelector("#kpi-categories")
+            let kpiList = document.querySelector("#kpis")
+
+            let filterValue = select_kpi_categories.value
+            let kpis = kpiArray.filter((r) => (r[0] === filterValue))
+            addUniqueOptionsToDropdownList(kpiList, kpis, 1, 2)
+        }
+
+        function addUniqueOptionsToDropdownList(element, arrayOfArrays, index1, index2) {
+            var currentlyAdded = [];
+            element.innerHTML = "";
+            arrayOfArrays.forEach(function (r) {
+                if (currentlyAdded.indexOf(r[index1]) === -1) {
+                    var option = document.createElement("option")
+                    if (index2) {
+                        option.value = r[index2];
+                    }
+                    option.textContent = r[index1];
+                    element.appendChild(option)
+                    currentlyAdded.push(r[index1])
+                }
+            });
+            let spinner = document.querySelector('#spinner').style.display = "none"
+        }
+
+        function collectElements() {
+            const objectOfElements = {
+                select_kpi_categories: document.querySelector("#kpi-categories"),
+                select_municipalities: document.querySelector("#municipality"),
+                kpiList: document.querySelector("#kpis"),
+                selectedYears: document.querySelectorAll('input[type="checkbox"]')
+            }
+            return objectOfElements
+        }
+
+        function getQueryValues() {
+
+            let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            let preserve = document.querySelector('input[type="radio"]');
+            let municipality = document.querySelector("#municipality");
+            let kpi = document.querySelector("#kpis");
+            let kpi_category = document.querySelector("#kpi-categories");
+
+            const objectOfValues = {
+                mun_title: municipality.options[municipality.selectedIndex].innerText,
+                mun_id: getOptionValue(municipality),
+                kpi_title: kpi.options[kpi.selectedIndex].innerText,
+                kpi_id: getOptionValue(kpi),
+                kpi_category_title: kpi_category.options[kpi_category.selectedIndex].innerText,
+                years: getYearsText(checkboxes)
+            }
+
+            if (!preserve.checked)
+                for (let checkbox of checkboxes) {
+                    checkbox.checked = false
+                }
+
+            return objectOfValues
+
+        }
+
+        function getOptionValue(elementWithOptions, method) {
+            let value = elementWithOptions.options[elementWithOptions.selectedIndex].value
+            return value
+        }
+
+        function getYearsText(checkboxes) {
+            let arr = []
+            for (let checkbox of checkboxes) {
+                if (checkbox.checked) {
+                    arr.push(checkbox.previousElementSibling.innerText)
+                }
+            }
+            let joinedArr = arr.join(',')
+
+            return joinedArr
+        }
+
+        function addToSheet() {
+            let object = getQueryValues();
+            console.log(object)
+            google.script.run.getParsedJson(object)
+
+        }
+
+        function clearSheet() {
+            google.script.run.withSuccessHandler(() => {
+                let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                let preserve = document.querySelector('input[type="radio"]');
+                if (!preserve.checked)
+                    for (let checkbox of checkboxes) {
+                        checkbox.checked = false
+                    }
+            }).clearIt()
+        }
+
+        document.querySelector("#submit").addEventListener('click', addToSheet)
+        document.querySelector("#clear").addEventListener('click', clearSheet)
+        document.querySelector("#kpi-categories").addEventListener('change', afterChangedCategory)
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+
+</html>
